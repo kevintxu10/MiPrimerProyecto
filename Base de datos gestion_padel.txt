@@ -1,0 +1,186 @@
+drop database if exists gestion_padel;
+CREATE DATABASE gestion_padel;
+USE gestion_padel;
+
+CREATE TABLE Usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    rol ENUM('admin', 'user') NOT NULL
+);
+
+
+CREATE TABLE Canchas (
+    id_cancha INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    tipo VARCHAR(20),
+    precio_hora DECIMAL(5,2),
+    esta_disponible BOOLEAN DEFAULT TRUE
+);
+
+
+CREATE TABLE Reservas (
+    id_reserva INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    id_cancha INT,
+    fecha DATE NOT NULL,
+    hora_inicio TIME NOT NULL,
+    total_pago DECIMAL(5,2),
+    metodo_pago ENUM('Tarjeta', 'Efectivo', 'Bono') not null,
+    CONSTRAINT fk_reserva_usuario FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario),
+    CONSTRAINT fk_reserva_cancha FOREIGN KEY (id_cancha) REFERENCES Canchas(id_cancha)
+);
+
+INSERT INTO Usuario (nombre, email, password, rol) VALUES 
+('Admin Decroly', 'admin@decroly.es', 'admin123', 'admin'),
+('Kevin Txu', 'kevin@gmail.com', 'pass123', 'user'),
+('Laura Garcia', 'laura@hotmail.com', 'user123', 'user'),
+('Pablo Fernandez', 'pablo@gmail.com', 'pablo123', 'user'),
+('Marta Gomez', 'marta@outlook.com', 'marta123', 'user'),
+('Diego Lopez', 'diego@gmail.com', 'diego123', 'user'),
+('Sara Ruiz', 'sara@yahoo.com', 'sara123', 'user'),
+('Javier Sanz', 'javier@gmail.com', 'javier123', 'user'),
+('Elena Mier', 'elena@gmail.com', 'elena123', 'user'),
+('Marcos Saiz', 'marcos@gmail.com', 'marcos123', 'user'),
+('Ana Belen', 'ana@gmail.com', 'ana123', 'user'),
+('Luis Miguel', 'luis@gmail.com', 'luis123', 'user'),
+('Lucia Silva', 'lucia@gmail.com', 'lucia123', 'user'),
+('Adrian Pozo', 'adrian@gmail.com', 'adrian123', 'user'),
+('Clara Lago', 'clara@gmail.com', 'clara123', 'user'),
+('Ivan Redondo', 'ivan@gmail.com', 'ivan123', 'user'),
+('Sofia Castro', 'sofia@gmail.com', 'sofia123', 'user'),
+('Raul Cano', 'raul@gmail.com', 'raul123', 'user'),
+('Belen Rueda', 'belen@gmail.com', 'belen123', 'user'),
+('Oscar Casas', 'oscar@gmail.com', 'oscar123', 'user'),
+('Mario Conde', 'mario@gmail.com', 'mario123', 'user'),
+('Cristina Pardo', 'cristina@gmail.com', 'cris123', 'user'),
+('Roberto Leal', 'roberto@gmail.com', 'rob123', 'user'),
+('Sandra Golpe', 'sandra@gmail.com', 'sandra123', 'user'),
+('Jorge Javier', 'jorge@gmail.com', 'jorge123', 'user');
+
+INSERT INTO Canchas (nombre, tipo, precio_hora, esta_disponible) VALUES 
+('Pista Central', 'Cristal', 22.00, 1),
+('Pista 2', 'Cristal', 18.50, 1),
+('Pista 3', 'Muro', 14.00, 1),
+('Pista 4', 'Muro', 14.00, 1),
+('Pista Panorámica', 'Cristal', 26.00, 1),
+('Pista 6', 'Muro', 12.50, 1),
+('Pista 7', 'Cristal', 19.00, 1),
+('Pista 8', 'Cristal', 18.00, 0),
+('Pista 9', 'Muro', 15.00, 1),
+('Pista 10', 'Cristal', 21.00, 1);
+
+INSERT INTO Reservas (id_usuario, id_cancha, fecha, hora_inicio, total_pago, metodo_pago) VALUES 
+(2, 1, '2024-05-01', '09:00:00', 22.00, 'Tarjeta'),
+(3, 2, '2024-05-01', '10:30:00', 18.50, 'Efectivo'),
+(4, 3, '2024-05-01', '12:00:00', 14.00, 'Bono'),
+(5, 4, '2024-05-01', '13:30:00', 14.00, 'Tarjeta'),
+(6, 5, '2024-05-01', '16:00:00', 26.00, 'Bono'),
+(7, 6, '2024-05-01', '17:30:00', 12.50, 'Efectivo'),
+(8, 7, '2024-05-01', '19:00:00', 19.00, 'Tarjeta'),
+(9, 9, '2024-05-01', '20:30:00', 15.00, 'Bono'),
+(10, 10, '2024-05-02', '09:00:00', 21.00, 'Tarjeta'),
+(11, 1, '2024-05-02', '10:30:00', 22.00, 'Efectivo'),
+(12, 2, '2024-05-02', '12:00:00', 18.50, 'Bono'),
+(13, 3, '2024-05-02', '13:30:00', 14.00, 'Tarjeta'),
+(14, 4, '2024-05-02', '16:00:00', 14.00, 'Efectivo'),
+(15, 5, '2024-05-02', '17:30:00', 26.00, 'Tarjeta'),
+(16, 6, '2024-05-02', '19:00:00', 12.50, 'Bono'),
+(17, 7, '2024-05-02', '20:30:00', 19.00, 'Tarjeta'),
+(18, 9, '2024-05-03', '09:00:00', 15.00, 'Efectivo'),
+(19, 10, '2024-05-03', '10:30:00', 21.00, 'Bono'),
+(20, 1, '2024-05-03', '12:00:00', 22.00, 'Tarjeta'),
+(21, 2, '2024-05-03', '13:30:00', 18.50, 'Efectivo'),
+(22, 3, '2024-05-03', '16:00:00', 14.00, 'Tarjeta'),
+(23, 4, '2024-05-03', '17:30:00', 14.00, 'Bono'),
+(24, 5, '2024-05-03', '19:00:00', 26.00, 'Efectivo'),
+(25, 6, '2024-05-03', '20:30:00', 12.50, 'Tarjeta'),
+(2, 7, '2024-05-04', '09:00:00', 19.00, 'Bono'),
+(3, 9, '2024-05-04', '10:30:00', 15.00, 'Tarjeta'),
+(4, 10, '2024-05-04', '12:00:00', 21.00, 'Efectivo'),
+(5, 1, '2024-05-04', '13:30:00', 22.00, 'Bono'),
+(6, 2, '2024-05-04', '16:00:00', 18.50, 'Tarjeta'),
+(7, 3, '2024-05-04', '17:30:00', 14.00, 'Efectivo'),
+(8, 4, '2024-05-04', '19:00:00', 14.00, 'Bono'),
+(9, 5, '2024-05-04', '20:30:00', 26.00, 'Tarjeta'),
+(10, 6, '2024-05-05', '09:00:00', 12.50, 'Efectivo'),
+(11, 7, '2024-05-05', '10:30:00', 19.00, 'Tarjeta'),
+(12, 9, '2024-05-05', '12:00:00', 15.00, 'Bono'),
+(13, 10, '2024-05-05', '13:30:00', 21.00, 'Tarjeta'),
+(14, 1, '2024-05-05', '16:00:00', 22.00, 'Efectivo'),
+(15, 2, '2024-05-05', '17:30:00', 18.50, 'Bono'),
+(16, 3, '2024-05-05', '19:00:00', 14.00, 'Tarjeta'),
+(17, 4, '2024-05-05', '20:30:00', 14.00, 'Efectivo'),
+(18, 5, '2024-05-06', '09:00:00', 26.00, 'Bono'),
+(19, 6, '2024-05-06', '10:30:00', 12.50, 'Tarjeta'),
+(20, 7, '2024-05-06', '12:00:00', 19.00, 'Efectivo'),
+(21, 9, '2024-05-06', '13:30:00', 15.00, 'Tarjeta'),
+(22, 10, '2024-05-06', '16:00:00', 21.00, 'Bono'),
+(23, 1, '2024-05-06', '17:30:00', 22.00, 'Efectivo'),
+(24, 2, '2024-05-06', '19:00:00', 18.50, 'Tarjeta'),
+(25, 3, '2024-05-06', '20:30:00', 14.00, 'Bono'),
+(2, 4, '2024-05-07', '09:00:00', 14.00, 'Tarjeta'),
+(3, 5, '2024-05-07', '10:30:00', 26.00, 'Efectivo'),
+(4, 6, '2024-05-07', '12:00:00', 12.50, 'Bono'),
+(5, 7, '2024-05-07', '13:30:00', 19.00, 'Tarjeta'),
+(6, 9, '2024-05-07', '16:00:00', 15.00, 'Efectivo'),
+(7, 10, '2024-05-07', '17:30:00', 21.00, 'Tarjeta'),
+(8, 1, '2024-05-07', '19:00:00', 22.00, 'Bono'),
+(9, 2, '2024-05-07', '20:30:00', 18.50, 'Efectivo'),
+(10, 3, '2024-05-08', '09:00:00', 14.00, 'Bono'),
+(11, 4, '2024-05-08', '10:30:00', 14.00, 'Tarjeta'),
+(12, 5, '2024-05-08', '12:00:00', 26.00, 'Efectivo'),
+(13, 6, '2024-05-08', '13:30:00', 12.50, 'Bono'),
+(14, 7, '2024-05-08', '16:00:00', 19.00, 'Tarjeta'),
+(15, 9, '2024-05-08', '17:30:00', 15.00, 'Efectivo'),
+(16, 10, '2024-05-08', '19:00:00', 21.00, 'Bono'),
+(17, 1, '2024-05-08', '20:30:00', 22.00, 'Tarjeta'),
+(18, 2, '2024-05-09', '09:00:00', 18.50, 'Efectivo'),
+(19, 3, '2024-05-09', '10:30:00', 14.00, 'Bono'),
+(20, 4, '2024-05-09', '12:00:00', 14.00, 'Tarjeta'),
+(21, 5, '2024-05-09', '13:30:00', 26.00, 'Efectivo'),
+(22, 6, '2024-05-09', '16:00:00', 12.50, 'Bono');
+
+SELECT nombre, email 
+FROM Usuario 
+WHERE rol = 'user';
+
+SELECT nombre, precio_hora 
+FROM Canchas 
+WHERE tipo = 'Cristal' AND esta_disponible = TRUE;
+
+SELECT * FROM Reservas 
+WHERE fecha = '2024-05-01';
+
+SELECT metodo_pago, SUM(total_pago) AS ingresos_totales
+FROM Reservas 
+GROUP BY metodo_pago;
+
+SELECT fecha, hora_inicio, total_pago 
+FROM Reservas 
+WHERE id_usuario = 2 
+ORDER BY fecha DESC;
+
+SELECT c.nombre AS pista, r.fecha, r.hora_inicio
+FROM Reservas r
+JOIN Canchas c ON r.id_cancha = c.id_cancha;
+
+SELECT u.nombre, COUNT(r.id_reserva) AS numero_reservas
+FROM Usuario u
+JOIN Reservas r ON u.id_usuario = r.id_usuario
+GROUP BY u.id_usuario
+ORDER BY numero_reservas DESC
+LIMIT 5;
+
+SELECT c.tipo, SUM(r.total_pago) AS total_recaudado
+FROM Canchas c
+JOIN Reservas r ON c.id_cancha = r.id_cancha
+GROUP BY c.tipo;
+
+SELECT * FROM Reservas 
+WHERE hora_inicio >= '18:00:00';
+
+SELECT AVG(total_pago) AS precio_medio_bono
+FROM Reservas 
+WHERE metodo_pago = 'Bono';
