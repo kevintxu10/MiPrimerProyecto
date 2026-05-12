@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox spacing="20" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.proyecto_demo.CanchasController">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <VBox spacing="10" prefWidth="250">
+        <Label text="NUEVA PISTA" styleClass="heading" style="-fx-font-weight: bold; -fx-font-size: 18px;"/>
+
+        <TextField fx:id="txtNombre" promptText="Nombre (ej: Pista Central)" />
+        <TextField fx:id="txtTipo" promptText="Tipo (ej: Cristal / Muro)" />
+        <TextField fx:id="txtPrecio" promptText="Precio por hora (ej: 15.50)" />
+
+        <Button text="Añadir Cancha" onAction="#onAgregarCancha" styleClass="my-button" maxWidth="Infinity"
+                style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-cursor: hand;"/>
+
+        <Label fx:id="lblMensaje" wrapText="true" />
+    </VBox>
+
+    <TableView fx:id="tablaCanchas" HBox.hgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+            <TableColumn fx:id="colNombre" text="Nombre Pista" prefWidth="150" />
+            <TableColumn fx:id="colTipo" text="Tipo" prefWidth="100" />
+            <TableColumn fx:id="colPrecio" text="Precio/h" prefWidth="100" />
+        </columns>
+    </TableView>
+</HBox>
