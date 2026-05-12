@@ -1,0 +1,62 @@
+/* Fondo general */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Títulos */
+.heading {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Botón Principal (Entrar / Registrar) */
+.my-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.my-button:hover {
+    -fx-background-color: #2980b9;
+}
+
+/* Botón de Éxito (Finalizar Registro) */
+.my-button-success {
+    -fx-background-color: #2ecc71;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.my-button-success:hover {
+    -fx-background-color: #27ae60;
+}
+
+/* Botones tipo Enlace (¿No tienes cuenta? / Volver) */
+.link-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2980b9;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.link-button:hover {
+    -fx-text-fill: #1a5276;
+}
+
+/* Mensajes de error y éxito */
+.my-error-text {
+    -fx-text-fill: #e74c3c;
+    -fx-font-weight: bold;
+}
+
+.my-validated-text {
+    -fx-text-fill: #27ae60;
+    -fx-font-weight: bold;
+}
